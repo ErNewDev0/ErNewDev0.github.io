@@ -26,8 +26,8 @@
 
         /* Adjusting position for date and time, more visually appealing */
         .time-display span {
-            display: block;
-            font-size: 1.2rem;
+            display: transparent;
+            font-size: 1rem;
             margin: 5px 0;
         }
 
