@@ -1,29 +1,22 @@
-document.addEventListener('DOMContentLoaded', function() {
+// Function to update the time
+function updateTime() {
+    const timeElement = document.getElementById("current-time-span");
+    const now = new Date();
+    const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+    timeElement.textContent = now.toLocaleTimeString('en-US', options);
+}
 
-    // Fungsi untuk mengupdate jam
-    function updateTime() {
-        const now = new Date();
-        const hours = now.getHours().toString().padStart(2, '0');
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        const seconds = now.getSeconds().toString().padStart(2, '0');
-        const timeString = `${hours}:${minutes}:${seconds}`;
-        document.getElementById('jam').textContent = timeString;
-    }
+// Function to update the date
+function updateDate() {
+    const dateElement = document.getElementById("current-date");
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    dateElement.textContent = now.toLocaleDateString('en-US', options);
+}
 
-    // Memperbarui jam setiap detik
-    setInterval(updateTime, 1000);
-    updateTime(); // Panggil sekali saat pertama kali dimuat
+// Call the update functions on page load
+updateDate();
+updateTime();
 
-    // Fungsi untuk mengupdate tanggal
-    function updateDate() {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = (now.getMonth() + 1).toString().padStart(2, '0');
-        const day = now.getDate().toString().padStart(2, '0');
-        const dateString = `${day}-${month}-${year}`;
-        document.getElementById('tanggal').textContent = dateString;
-    }
-
-    // Memperbarui tanggal saat halaman dimuat
-    updateDate();
-});
+// Optionally, update the time every second
+setInterval(updateTime, 1000);
