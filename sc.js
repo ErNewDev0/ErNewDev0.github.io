@@ -1,22 +1,27 @@
-// Function to update the time
-function updateTime() {
-    const timeElement = document.getElementById("current-time-span");
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Full Kode Di Github Saya : https://github.com/Lenwyy/
+
+  // Update Waktu
+  function updateTime() {
     const now = new Date();
-    const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-    timeElement.textContent = now.toLocaleTimeString('en-US', options);
-}
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    const timeString = `${hours}:${minutes}:${seconds}`;
+    document.getElementById('jam').textContent = timeString;
+  }
+  setInterval(updateTime, 1000);
+  updateTime();
 
-// Function to update the date
-function updateDate() {
-    const dateElement = document.getElementById("current-date");
+  // Update Tanggal
+  function updateDate() {
     const now = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    dateElement.textContent = now.toLocaleDateString('en-US', options);
-}
-
-// Call the update functions on page load
-updateDate();
-updateTime();
-
-// Optionally, update the time every second
-setInterval(updateTime, 1000);
+    const year = now.getFullYear();
+    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+    const day = now.getDate().toString().padStart(2, '0');
+    const dateString = `${day}-${month}-${year}`;
+    document.getElementById('tanggal').textContent = dateString;
+  }
+  updateDate();
+});
