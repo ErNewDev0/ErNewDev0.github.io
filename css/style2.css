@@ -175,3 +175,218 @@
         transform: translate(2px, 2px);
     }
 }
+
+    /* Additional CSS to ensure responsiveness */
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-display {
+            font-size: 1rem;  /* Make the text smaller */
+            color: #ccc;  /* Lighter color for subtle text */
+            text-align: left;
+            margin-top: 10px;
+            font-weight: normal;
+            opacity: 0.8;
+        }
+
+        .btn-container {
+            margin-top: 20px;
+        }
+    .main img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* API Card */
+    .api-card {
+        margin: 10px auto;
+        padding: 1.5em;
+        width: 180px;
+        text-align: center;
+        border-radius: 8px;
+        background: transparent; /* Hilangkan background kotak */
+        color: #3d3167;
+        font-size: 0.9rem;
+        line-height: 2.0; /* Adjust line height to reduce spacing */
+        transition: 0.3s;
+        box-shadow: none; /* Hilangkan shadow kotak */
+    }
+
+    /* Hover Effect pada API Card */
+    .api-card:hover {
+        transform: scale(1.05);
+    }
+
+    /* Link "ApiNyaEr" */
+    .api-card a {
+        display: block;
+        padding: 10px;
+        border-radius: 8px;
+        background: transparent; /* Hilangkan background */
+        color: #d55c80;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+        border: 2px solid transparent; /* Border transparan untuk efek glow */
+        position: relative;
+        overflow: hidden;
+        animation: fadeIn 1s ease-in-out; /* Animation added */
+    }
+
+    /* Glow Pelangi hanya di pinggiran */
+    .api-card a::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(white, white), radial-gradient(circle, #ff0054, #ff7b00, #ffcc00, #fffc00, #80ff00, #00ffee, #002bff, #aa00ff, #ff00aa); /* Pelangi di pinggir */
+        background-origin: border-box;
+        background-clip: content-box, border-box; /* Efek glow di pinggir */
+        z-index: -1; /* Pastikan berada di belakang teks */
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    /* Glow lebih terang saat hover */
+    .api-card a:hover::before {
+        opacity: 1;
+    }
+
+    /* Hover: Glow Lebih Terang */
+    .api-card a:hover {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.4); /* Glow lebih terang */
+        transform: scale(1.1);
+    }
+
+    /* State aktif: Warna tetap biru pada teks */
+    .api-card a:active {
+        color: #1E90FF; /* Warna biru saat klik */
+    }
+
+    /* Custom Buttons (GitHub, Telegram, REST API) */
+    .custom-btn {
+        display: inline-block;
+        margin: 10px;
+        padding: 10px 15px;
+        border-radius: 5px;
+        background: transparent; /* Hilangkan background */
+        color: #d3d3d3;
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+        border: 2px solid transparent; /* Border transparan untuk efek glow */
+        position: relative;
+        overflow: hidden;
+        animation: fadeIn 1s ease-in-out; /* Animation added */
+    }
+
+    /* Glow Pelangi hanya di pinggiran button */
+    .custom-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(white, white), radial-gradient(circle, #ff0054, #ff7b00, #ffcc00, #fffc00, #80ff00, #00ffee, #002bff, #aa00ff, #ff00aa); /* Pelangi di pinggir */
+        background-origin: border-box;
+        background-clip: content-box, border-box; /* Efek glow di pinggir */
+        z-index: -1; /* Pastikan berada di belakang teks */
+        border-radius: 5px;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    /* Hover: Glow Pelangi hanya di pinggiran */
+    .custom-btn:hover::before {
+        opacity: 1;
+    }
+
+    /* Hover: Glow Lebih Terang */
+    .custom-btn:hover {
+        text-shadow: 10px; /* Hilangkan glow pada teks */
+        transform: scale(1.1);
+    }
+
+    /* State aktif: Warna tetap biru pada teks */
+    .custom-btn:active {
+        color: #1E90FF; /* Warna biru saat klik */
+    }
+
+    /* Flexbox untuk Align Tombol */
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    /* Efek Glow di Gambar */
+    .main img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+    }
+
+    /* Header & Navbar */
+    nav {
+        background: none; /* Hilangkan background */
+        padding: 15px;
+        text-align: center;
+    }
+
+    .nav_links a {
+        color: white;
+        font-size: 16px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .nav_links a:hover {
+        text-shadow: 0 0 10px white;
+    }
+
+    /* Social Media Icons */
+    .main2 ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+    }
+
+    .main2 ul li {
+        margin: 0 10px;
+    }
+
+    .main2 ul li a {
+        color: white;
+        font-size: 20px;
+        transition: 0.3s;
+    }
+
+    .main2 ul li a:hover {
+        text-shadow: 0 0 15px white;
+        transform: scale(1.2);
+    }
+
+    /* Animation: Fade-in effect */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
