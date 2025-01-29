@@ -81,15 +81,22 @@
 }
 
 
-  <h2 class="centered-title">Informasi</h2>
-  <div class="work__card mix apps sites">
-    <h3 class="work__title"><b>TimeZone</b></h3>
-    <div class="h3 mb-0 font-weight-bold" id="jam"></div>
-    <br>
-    <h3 class="work__title"><b>Date</b></h3>
-    <div class="h5 mb-0 font-weight-bold" id="tanggal"></div>
-    <br>
-  </div>
+  h1 {
+    color: #fff;
+    text-align: center;
+  }
+
+  h2 {
+    color: #fff;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  h6 {
+    color: #fff;
+    margin-top: 20px;
+    text-align: center;
+  }
 
 
 
