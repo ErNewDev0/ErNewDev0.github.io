@@ -1,34 +1,43 @@
-// Fungsi untuk mendapatkan waktu dan tanggal
-function updateTimeDate() {
-    let now = new Date();
+function updateDateTime() {
+    const dateElement = document.getElementById('date');
+    const timeElement = document.getElementById('time');
 
-    // Nama bulan
-    const bulan = [
+    // Mengambil tanggal dan waktu sekarang
+    const now = new Date();
+
+    // Format Tanggal
+    const day = now.getDate();
+    const month = now.getMonth(); // Bulan dimulai dari 0 (Januari = 0)
+    const year = now.getFullYear();
+
+    // Bulan dalam Bahasa Indonesia
+    const months = [
         "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
         "Juli", "Agustus", "September", "Oktober", "November", "Desember"
     ];
 
-    // Format tanggal: DD bulan YYYY
-    let date = now.getDate().toString().padStart(2, '0') + ' ' + 
-              bulan[now.getMonth()] + ' ' + 
-              now.getFullYear();
+    // Format jam
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+    const formattedTime = `${hours}:${minutes}:${seconds}`;
 
-    // Format jam: HH:mm:ss
-    let time = now.getHours().toString().padStart(2, '0') + ':' + 
-               now.getMinutes().toString().padStart(2, '0') + ':' + 
-               now.getSeconds().toString().padStart(2, '0');
+    // Weton - Hari dan Pasaran
+    const weekdays = [
+        "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"
+    ];
+    const pasaran = [
+        "Legi", "Pahing", "Pon", "Wage", "Kliwon"
+    ];
 
-    // Zona Waktu WIB
-    let wib = "WIB (UTC+7)";
+    // Menghitung weton berdasarkan tanggal
+    const dayOfWeek = now.getDay(); // 0 = Minggu, 1 = Senin, dst.
+    const dayOfMonth = (day + dayOfWeek) % 5; // Hitung pasaran berdasarkan hari
 
-    // Menampilkan tanggal, jam, dan WIB
-    document.getElementById("tanggal").innerHTML = `<b>Tanggal:</b> ${date}`;
-    document.getElementById("jam").innerHTML = `<b>Jam:</b> ${time}`;
-    document.getElementById("wib").innerHTML = wib;
+    // Menampilkan tanggal, bulan, jam, dan weton
+    dateElement.innerHTML = `<b>Tanggal:</b> ${day} ${months[month]} ${year} | ${weekdays[dayOfWeek]} ${pasaran[dayOfMonth]}`;
+    timeElement.textContent = formattedTime;
 }
 
-// Update waktu dan tanggal setiap detik
-setInterval(updateTimeDate, 1000);
-
-// Panggil fungsi sekali saat halaman dimuat
-updateTimeDate();
+// Update tanggal dan jam setiap detik
+setInterval(updateDateTime, 1000);
