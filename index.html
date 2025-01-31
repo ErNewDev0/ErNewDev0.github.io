@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,151 +13,103 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #121212;
+            background: #121212;
             color: #fff;
-            font-family: 'Courier New', monospace;
+            font-family: monospace;
             text-align: center;
             overflow: hidden;
         }
 
-        /* Loading Bar at Top */
-        .loading-bar-container {
+        /* Loading Bar */
+        .loading-bar {
             position: absolute;
             top: 0;
-            width: 100%;
-            height: 5px;
-            background-color: #444;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .loading-bar {
-            height: 100%;
             width: 0;
+            height: 5px;
             background: linear-gradient(90deg, #ff00ff, #00ffff, #ff0000);
-            animation: loadingProgress 2s ease-in-out forwards;
+            animation: loading 5s linear forwards;
         }
 
-        @keyframes loadingProgress {
+        @keyframes loading {
             0% { width: 0; }
-            50% { width: 70%; }
             100% { width: 100%; }
         }
 
-        /* Pixelated Block Animation */
-        .block-container {
+        /* Animasi Blok */
+        .blocks {
             display: flex;
-            justify-content: center;
+            gap: 10px; /* Lebih renggang */
             margin-top: 20px;
         }
 
         .block {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin: 5px;
-            background-color: #00ffff;
-            animation: blockDance 0.7s ease-in-out infinite alternate;
+            width: 25px;
+            height: 25px;
+            background: #00ffff;
+            border-radius: 5px; /* Agar lebih halus */
+            animation: bounce 1s ease-in-out infinite alternate;
         }
 
-        .block:nth-child(1) { animation-delay: 0s; }
         .block:nth-child(2) { animation-delay: 0.2s; }
         .block:nth-child(3) { animation-delay: 0.4s; }
 
-        @keyframes blockDance {
-            0% { transform: translateY(0) rotate(0deg); background-color: #ff00ff; }
-            50% { transform: translateY(-10px) rotate(15deg); background-color: #ffff00; }
-            100% { transform: translateY(0) rotate(0deg); background-color: #00ffff; }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); } /* Lebih tinggi tapi smooth */
+            100% { transform: translateY(0); }
         }
 
-        /* Loading Text */
+        /* Teks Loading */
         .loading-text {
             margin-top: 20px;
-            font-size: 24px;
+            font-size: 18px;
             font-weight: bold;
-            text-align: center;
-            display: inline-block;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 2px solid #fff;
-            width: auto;
-            padding: 0 10px;
+            animation: colorChange 2s infinite;
         }
 
-        /* Cursor Blinking */
-        @keyframes blink-caret {
-            50% { border-color: transparent; }
-        }
-
-        /* Color Changing Text */
         @keyframes colorChange {
             0% { color: #ff0000; }
             33% { color: #00ff00; }
             66% { color: #0000ff; }
             100% { color: #ffffff; }
         }
-
-        .colorful {
-            animation: colorChange 2s infinite;
-        }
     </style>
 </head>
 <body>
 
-    <!-- Loading Bar -->
-    <div class="loading-bar-container">
-        <div class="loading-bar"></div>
-    </div>
+    <div class="loading-bar"></div>
 
-    <!-- Pixelated Blocks Animation -->
-    <div class="block-container">
+    <div class="blocks">
         <div class="block"></div>
         <div class="block"></div>
         <div class="block"></div>
     </div>
 
-    <!-- Funny Loading Text -->
-    <div class="loading-text colorful" id="loadingText">Memuat...</div>
+    <div class="loading-text" id="loadingText">Memuat...</div>
 
     <script>
-        // List of Funny Loading Texts
         const texts = [
-            "Sedang Memasang Jam.. ",
-            "Sabar, memasang tamggal... 🔨",
-            "Lagi download RAM tambahan... ⏳",
-            "Mencari WiFi gratis... 📡",
-            "Lagi cari bug, ketemu semut dulu... 🐜",
-            "Kode lagi ngopi dulu... ☕",
-            "Memuat... Sumpah gak bohong! 😏",
-            "Lagi ngobrol sama server... 📞",
-            "Sebentar, aku lagi reboot otak... 🤯"
+            "Memasang jam...",
+            "Menambah RAM virtual...",
+            "Mencari WiFi gratis...",
+            "Ngopi dulu bentar...",
+            "Lagi ngobrol sama server...",
+            "Memuat... sumpah gak bohong!"
         ];
 
         let index = 0;
-        let loadingText = document.getElementById("loadingText");
-
-        function typeText(text, i = 0) {
-            if (i < text.length) {
-                loadingText.innerHTML = text.substring(0, i + 1) + "▌";
-                setTimeout(() => typeText(text, i + 1), 50);
-            } else {
-                loadingText.innerHTML = text;
-            }
-        }
-
         function changeText() {
-            let newText = texts[index];
-            loadingText.innerHTML = "";
-            typeText(newText);
+            document.getElementById("loadingText").textContent = texts[index];
             index = (index + 1) % texts.length;
         }
 
-        setInterval(changeText, 2500);
-        changeText(); // Start immediately
-
-        // Redirect after loading bar finishes
-        setTimeout(function() {
-            window.location.href = "index2.html"; // Replace with your desired URL
+        // Ubah teks loading setiap 2 detik, tapi berhenti 1 detik sebelum redirect
+        let interval = setInterval(changeText, 2000);
+        
+        // Redirect setelah 5 detik
+        setTimeout(() => {
+            clearInterval(interval); // Hentikan perubahan teks sebelum redirect
+            window.location.href = "index2.html";
         }, 5000);
     </script>
 
