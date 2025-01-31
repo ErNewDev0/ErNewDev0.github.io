@@ -1,4 +1,4 @@
-/* Pastikan semua elemen menggunakan box-sizing */
+/* CSS Reset - Menghilangkan margin, padding default */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -10,15 +10,17 @@ body {
     background-color: #111;
     color: #fff;
     font-family: Arial, sans-serif;
-    height: 100vh;
+    height: 100svh; /* Menghindari bug di mobile (Safari) */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased; /* Konsistensi font */
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Tombol React yang responsif */
+/* Tombol React */
 .react-container {
     position: fixed;
     bottom: 10%;
@@ -37,6 +39,10 @@ body {
 }
 
 .react-container:hover {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
     transform: scale(1.1);
 }
 
@@ -75,17 +81,17 @@ body {
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
 }
 
-/* Tanggal & Weton di pojok kiri bawah agak ke atas */
+/* Tanggal & Weton di pojok kiri bawah */
 .date-container {
     position: fixed;
-    bottom: 10%; /* Naikkan sedikit dari 5% ke 10% */
+    bottom: 10%;
     left: 5%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
     cursor: pointer;
-    font-size: 12px; /* Ukuran kecil */
+    font-size: 12px;
 }
 
 /* Tanggal */
@@ -134,6 +140,10 @@ body {
 }
 
 .api-card:hover {
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
     transform: scale(1.05);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
@@ -155,6 +165,10 @@ body {
 
 .custom-btn:hover {
     border-color: #ff4757;
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
     transform: scale(1.1);
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
@@ -176,7 +190,7 @@ body {
     }
 
     .date-container {
-        bottom: 8%; /* Naikkan sedikit */
+        bottom: 8%;
         left: 5%;
         font-size: 10px;
     }
