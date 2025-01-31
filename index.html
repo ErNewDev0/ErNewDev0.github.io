@@ -2,212 +2,164 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://t101.pixhost.to/thumbs/504/554431201_photo_2025-01-12_00-48-03_7458824443150729324.jpg">
-    <title>What Is This</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/style2.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous">
-    <script>@import url('https://fonts.cdnfonts.com/css/pixel-operator');</script>
+    <title>Loading...</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Loading Bar at Top */
+        .loading-bar-container {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #444;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .loading-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #ff00ff, #00ffff, #ff0000);
+            animation: loadingProgress 2s ease-in-out forwards;
+        }
+
+        @keyframes loadingProgress {
+            0% { width: 0; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+
+        /* Pixelated Block Animation */
+        .block-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .block {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin: 5px;
+            background-color: #00ffff;
+            animation: blockDance 0.7s ease-in-out infinite alternate;
+        }
+
+        .block:nth-child(1) { animation-delay: 0s; }
+        .block:nth-child(2) { animation-delay: 0.2s; }
+        .block:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes blockDance {
+            0% { transform: translateY(0) rotate(0deg); background-color: #ff00ff; }
+            50% { transform: translateY(-10px) rotate(15deg); background-color: #ffff00; }
+            100% { transform: translateY(0) rotate(0deg); background-color: #00ffff; }
+        }
+
+        /* Loading Text */
+        .loading-text {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid #fff;
+            width: auto;
+            padding: 0 10px;
+        }
+
+        /* Cursor Blinking */
+        @keyframes blink-caret {
+            50% { border-color: transparent; }
+        }
+
+        /* Color Changing Text */
+        @keyframes colorChange {
+            0% { color: #ff0000; }
+            33% { color: #00ff00; }
+            66% { color: #0000ff; }
+            100% { color: #ffffff; }
+        }
+
+        .colorful {
+            animation: colorChange 2s infinite;
+        }
+    </style>
 </head>
 <body>
-    <div id="clock-container">
-        <canvas id="clock" width="100" height="100"></canvas>
-    </div>
-    <!-- Tanggal & Weton -->
-    <div class="date-container" onclick="flipDate()">
-        <div class="date-box">
-            <span id="flip-date">01 Januari 2025</span>
-        </div>
-        <div class="weton-box">
-            <span id="weton">Wage Pon</span>
-        </div>
+
+    <!-- Loading Bar -->
+    <div class="loading-bar-container">
+        <div class="loading-bar"></div>
     </div>
 
-    <!-- Tombol React Kecil -->
-    <div class="react-container" onclick="addTextEffect()">
-        <div class="react-emoji">😭</div>
+    <!-- Pixelated Blocks Animation -->
+    <div class="block-container">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
     </div>
-    
-    <div class="animation-wrapper">
-        <div class="particle particle-1"></div>
-        <div class="particle particle-2"></div>
-        <div class="particle particle-3"></div>
-        <div class="particle particle-4"></div>
-    </div>
-    
-    <div class="row no-gutters">
-        <div class="col-xl-4">
-            <section class="main">
-                <a href="https://github.com/erbots?tab=repositories">
-                    <img src="https://t101.pixhost.to/thumbs/504/554431201_photo_2025-01-12_00-48-03_7458824443150729324.jpg" alt="img" style="object-fit: cover;">
-                </a>
-                <span>ErNewDev0</span>
-                <p>print("Follow Me☺️☺️")</p>
 
-                <!-- Card API -->
-                <div class="api-card">
-                    <a href="https://docs-apinyaer.readthedocs.io">ApiNyaEr</a>
-                </div>
+    <!-- Funny Loading Text -->
+    <div class="loading-text colorful" id="loadingText">Memuat...</div>
 
-                <!-- Custom Buttons -->
-                <div class="btn-container">
-                    <a href="https://github.com/erbots" class="custom-btn">GitHub</a>
-                    <a href="https://t.me/chakszzz" class="custom-btn">Telegram</a>
-                    <a href="https://rest-er-api.vercel.app" class="custom-btn">REST API</a>
-                </div>
-
-            </section>
-        </div>
-
-        <div class="col-lg-8">
-            <header>
-                <nav>
-                    <div class="header_logo"></div>
-                    <div class="header_links">
-                        <ul class="nav_links">
-                            <li class="nav_link"><a href="#" onClick="window.location.reload();">Reload</a></li>
-                        </ul>
-                    </div>
-                </nav>
-                
-                <section class="main2">
-                    <ul>
-                        <li><a target="_blank" href="https://t.me/chakszzz"><i class="fab fa-telegram"></i></a></li>
-                        <li><a target="_blank" href="https://github.com/erbots"><i class="fab fa-github"></i></a></li>
-                        <li><a target="_blank" href="https://instagram.com/rikoyuan_"><i class="fab fa-instagram"></i></a></li>
-                    </ul>
-                </section>
-            </header>
-        </div>
-    </div>
     <script>
-        const dateElement = document.getElementById("flip-date");
-        const wetonElement = document.getElementById("weton");
+        // List of Funny Loading Texts
+        const texts = [
+            "Sedang Memasang Jam.. ",
+            "Sabar, memasang tamggal... 🔨",
+            "Lagi download RAM tambahan... ⏳",
+            "Mencari WiFi gratis... 📡",
+            "Lagi cari bug, ketemu semut dulu... 🐜",
+            "Kode lagi ngopi dulu... ☕",
+            "Memuat... Sumpah gak bohong! 😏",
+            "Lagi ngobrol sama server... 📞",
+            "Sebentar, aku lagi reboot otak... 🤯"
+        ];
 
-        function updateDate() {
-            const date = new Date();
-            const day = date.getDate();
-            const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni",
-                                "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-            const month = monthNames[date.getMonth()];
-            const year = date.getFullYear();
+        let index = 0;
+        let loadingText = document.getElementById("loadingText");
 
-            dateElement.innerText = `${day} ${month} ${year}`;
-
-            // Hitung weton
-            const pasaran = ["Legi", "Pahing", "Pon", "Wage", "Kliwon"];
-            const hariJawa = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-            const wetonIndex = (date.getDay() + day) % 5;
-            wetonElement.innerText = `${hariJawa[date.getDay()]} ${pasaran[wetonIndex]}`;
-        }
-
-        function flipDate() {
-            const dateBox = document.querySelector('.date-box');
-            dateBox.classList.add('flipping');
-            setTimeout(() => {
-                dateBox.classList.remove('flipping');
-            }, 400);
-        }
-
-        setInterval(updateDate, 10000);
-        updateDate();
-        function drawClock() {
-            const canvas = document.getElementById("clock");
-            const ctx = canvas.getContext("2d");
-            const now = new Date();
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const radius = 40;
-
-            // 🎯 Gambar Lingkaran Jam
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-            ctx.fillStyle = "#000";
-            ctx.fill();
-            ctx.lineWidth = 3;
-            ctx.strokeStyle = "#00FFFF";
-            ctx.stroke();
-            
-            // 🎯 Gambar Titik Tengah
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, 3, 0, 2 * Math.PI);
-            ctx.fillStyle = "#00FFFF";
-            ctx.fill();
-
-            // 🎯 Ganti angka dengan teks "er new dev 0"
-            ctx.fillStyle = "#00FFFF";
-            ctx.font = "9px 'Press Start 2P'";
-            ctx.textAlign = "center";
-            ctx.fillText("Er", centerX, centerY - 25);
-            ctx.fillText("New", centerX + 30, centerY + 5);
-            ctx.fillText("Dev", centerX, centerY + 35);
-            ctx.fillText("0", centerX - 30, centerY + 5);
-
-            // 🎯 Gambar Jarum Jam
-            function drawHand(angle, length, color, lineWidth) {
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.lineTo(centerX + length * Math.cos(angle), centerY + length * Math.sin(angle));
-                ctx.strokeStyle = color;
-                ctx.lineWidth = lineWidth;
-                ctx.lineCap = "round";
-                ctx.stroke();
-            }
-
-            // 🎯 Konversi Waktu ke Sudut
-            const hours = now.getHours() % 12;
-            const minutes = now.getMinutes();
-            const seconds = now.getSeconds();
-
-            const hourAngle = ((hours + minutes / 60) * 30 - 90) * Math.PI / 180;
-            const minuteAngle = ((minutes + seconds / 60) * 6 - 90) * Math.PI / 180;
-            const secondAngle = (seconds * 6 - 90) * Math.PI / 180;
-
-            drawHand(hourAngle, 20, "#00FFFF", 4);
-            drawHand(minuteAngle, 30, "#FFFFFF", 3);
-            drawHand(secondAngle, 35, "#FF0000", 2);
-
-            requestAnimationFrame(drawClock);
-        }
-
-        drawClock();
-        
-        function addTextEffect() {
-            const texts = ["ah ah", "goblok", "anjir", "lah", "asw", "bangsat", "wew"]; // Random kata
-            for (let i = 0; i < 10; i++) {  // 10 teks per klik
-                const text = document.createElement("div");
-                text.classList.add("splash-text");
-
-                // Pilih teks random
-                text.innerText = texts[Math.floor(Math.random() * texts.length)];
-
-                // Posisi acak
-                const x = Math.random() * window.innerWidth * 0.8;
-                const y = Math.random() * window.innerHeight * 0.8;
-                text.style.left = `${x}px`;
-                text.style.top = `${y}px`;
-
-                // Ukuran random
-                text.style.fontSize = `${Math.random() * 10 + 15}px`;
-
-                // Warna acak merah/kuning
-                text.style.color = Math.random() > 0.5 ? "#ff4757" : "#f9ca24";
-
-                document.body.appendChild(text);
-
-                // Hapus teks setelah animasi selesai
-                setTimeout(() => {
-                    text.remove();
-                }, 800);
+        function typeText(text, i = 0) {
+            if (i < text.length) {
+                loadingText.innerHTML = text.substring(0, i + 1) + "▌";
+                setTimeout(() => typeText(text, i + 1), 50);
+            } else {
+                loadingText.innerHTML = text;
             }
         }
+
+        function changeText() {
+            let newText = texts[index];
+            loadingText.innerHTML = "";
+            typeText(newText);
+            index = (index + 1) % texts.length;
+        }
+
+        setInterval(changeText, 2500);
+        changeText(); // Start immediately
+
+        // Redirect after loading bar finishes
+        setTimeout(function() {
+            window.location.href = "index2.html"; // Replace with your desired URL
+        }, 5000);
     </script>
+
 </body>
 </html>
