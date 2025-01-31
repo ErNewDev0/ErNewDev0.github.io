@@ -1,346 +1,197 @@
+/* Pastikan semua elemen menggunakan box-sizing */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    /* Additional CSS to ensure responsiveness */
+/* Background untuk halaman utama */
+body {
+    background-color: #111;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
 
-        /* Tombol React */
-        .react-container {
-            position: absolute;
-            bottom: 100px;
-            right: 100px;
-            left: 50px;
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 0, 0, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 30%;
-            box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.8);
-            cursor: pointer;
-            z-index: 1;
-            font-family: Arial, sans-serif;
-        }
+/* Tombol React yang responsif */
+.react-container {
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    z-index: 100;
+    transition: transform 0.3s ease-in-out;
+}
 
-        .react-emoji {
-            font-size: 20px;
-        }
+.react-container:hover {
+    transform: scale(1.1);
+}
 
-        /* Efek Teks Muncrat */
-        .splash-text {
-            position: absolute;
-            font-size: 18px;
-            font-weight: bold;
-            color: #ff4757;
-            opacity: 1;
-            animation: splashAnimation 1s ease-out forwards;
-            pointer-events: none;
-        }
+.react-emoji {
+    font-size: 24px;
+}
 
-        @keyframes splashAnimation {
-            0% {
-                transform: scale(1) translateY(0);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.5) translateY(-30px);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(0) translateY(-50px);
-                opacity: 0;
-            }
-        }
-    
+/* Efek teks muncul (splash effect) */
+.splash-text {
+    position: absolute;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff4757;
+    animation: splashAnimation 1s ease-out forwards;
+    pointer-events: none;
+}
 
+@keyframes splashAnimation {
+    0% { transform: scale(1) translateY(0); opacity: 1; }
+    50% { transform: scale(1.5) translateY(-30px); }
+    100% { transform: scale(0) translateY(-50px); opacity: 0; }
+}
 
-        #clock-container {
-            position: absolute;
-            top: 3px;
-            right: 15px;
-            width: 100px;
-            height: 100px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
-        }
+/* Clock container */
+#clock-container {
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    width: 80px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+}
 
-        canvas {
-            width: 90px;
-            height: 90px;
-        }
+/* Tanggal & Weton di pojok kiri bawah agak ke atas */
+.date-container {
+    position: fixed;
+    bottom: 10%; /* Naikkan sedikit dari 5% ke 10% */
+    left: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    cursor: pointer;
+    font-size: 12px; /* Ukuran kecil */
+}
 
-        .flip {
-            transform: rotateX(360deg);
-        }
+/* Tanggal */
+.date-box {
+    font-size: 14px;
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    padding: 4px 8px;
+    border-radius: 6px;
+    box-shadow: 0 0 4px rgba(255, 69, 96, 0.6);
+    transition: transform 0.3s, background 0.3s, color 0.3s;
+}
 
-        .anime-img {
-            width: 60px; /* Diperbesar sedikit */
-            height: 60px;
-            object-fit: contain;
-            filter: drop-shadow(0px 0px 5px #ff69b4);
-        }
-       
-        /* tanggal */
-        .main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        body {
-            background-color: #111;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: flex-start;
-            color: #fff;
-            overflow: hidden;
-        }
-        /* Container tanggal */
-        .date-container {
-            position: absolute;
-            bottom: 105px;
-            left: 105px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            cursor: pointer;
-            z-index: -1;
-        }
+/* Weton */
+.weton-box {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #00ffff;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 4px 8px;
+    border-radius: 6px;
+    box-shadow: 0 0 4px rgba(0, 255, 255, 0.5);
+}
 
-        /* Tampilan tanggal (lebih ramping) */
-        .date-box {
-            font-family: 'Pixel Operator', sans-serif;
-            font-size: 15px;
-            background: linear-gradient(45deg, #ff416c, #ff4b2b);
-            padding: 3px 6px;
-            border-radius: 1px;
-            box-shadow: 0px 0px 5px rgba(255, 69, 96, 0.6);
-            transition: transform 0.3s, background 0.3s, color 0.3s;
-            z-index: 1;
-        }
+/* Efek flip */
+@keyframes flip {
+    0% { transform: rotateX(0); }
+    50% { transform: rotateX(90deg); }
+    100% { transform: rotateX(0); }
+}
 
-        /* Tampilan weton lebih kecil */
-        .weton-box {
-            margin-top: 1px;
-            font-family: 'Pixel Operator', sans-serif;
-            font-size: 15px;
-            color: #00ffff;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 1px;
-            border-radius: 4px;
-            box-shadow: 0px 0px 4px rgba(0, 255, 255, 0.5);
-            z-index: -1;
-        }
+.flipping {
+    animation: flip 0.2s ease-in-out;
+}
 
-        /* Efek flip yang lebih smooth */
-        .flipping {
-            animation: flip 0.2s ease-in-out;
-        }
+/* API Card */
+.api-card {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 15px;
+    text-align: center;
+    border-radius: 5px;
+    background: transparent;
+    color: #fff;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-        @keyframes flip {
-            0% { transform: rotateX(0); background: linear-gradient(45deg, #ff416c, #ff4b2b); color: #fff; }
-            50% { transform: rotateX(90deg); background: linear-gradient(45deg, #66ff66, #33cc33); color: #000; }
-            100% { transform: rotateX(0); background: linear-gradient(45deg, #ff416c, #ff4b2b); color: #fff; }
-        }
+.api-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
 
-        .row.no-gutters {
-            margin: 0;
-        }
+/* Tombol Custom */
+.custom-btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background: transparent;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    transition: transform 0.3s ease-in-out, border-color 0.3s ease;
+}
 
-        .header_links ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
+.custom-btn:hover {
+    border-color: #ff4757;
+    transform: scale(1.1);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
 
-        .header_links ul li {
-            display: inline;
-            margin-right: 10px;
-        }
-    .main img {
-        width: 100%;
-        height: auto;
-        border-radius: 10px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+/* Responsif untuk layar kecil */
+@media (max-width: 768px) {
+    .react-container {
+        bottom: 5%;
+        right: 5%;
+        width: 50px;
+        height: 50px;
     }
 
-    /* API Card */
+    #clock-container {
+        top: 3%;
+        right: 3%;
+        width: 70px;
+        height: 70px;
+    }
+
+    .date-container {
+        bottom: 8%; /* Naikkan sedikit */
+        left: 5%;
+        font-size: 10px;
+    }
+
+    .date-box, .weton-box {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+
     .api-card {
-        margin: 10px auto;
-        padding: 1.5em;
-        width: 180px;
-        text-align: center;
-        border-radius: 8px;
-        background: transparent; /* Hilangkan background kotak */
-        color: #3d3167;
-        font-size: 0.9rem;
-        line-height: 2.0; /* Adjust line height to reduce spacing */
-        transition: 0.3s;
-        box-shadow: none; /* Hilangkan shadow kotak */
+        max-width: 200px;
     }
 
-    /* Hover Effect pada API Card */
-    .api-card:hover {
-        transform: scale(1.05);
-    }
-
-    /* Link "ApiNyaEr" */
-    .api-card a {
-        display: block;
-        padding: 10px;
-        border-radius: 8px;
-        background: transparent; /* Hilangkan background */
-        color: #d55c80;
-        text-decoration: none;
-        font-weight: bold;
-        transition: 0.3s;
-        border: 2px solid transparent; /* Border transparan untuk efek glow */
-        position: relative;
-        overflow: hidden;
-        animation: fadeIn 1s ease-in-out; /* Animation added */
-    }
-
-    /* Glow Pelangi hanya di pinggiran */
-    .api-card a::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: linear-gradient(white, white), radial-gradient(circle, #ff0054, #ff7b00, #ffcc00, #fffc00, #80ff00, #00ffee, #002bff, #aa00ff, #ff00aa); /* Pelangi di pinggir */
-        background-origin: border-box;
-        background-clip: content-box, border-box; /* Efek glow di pinggir */
-        z-index: -1; /* Pastikan berada di belakang teks */
-        border-radius: 8px;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-    }
-
-    /* Glow lebih terang saat hover */
-    .api-card a:hover::before {
-        opacity: 1;
-    }
-
-    /* Hover: Glow Lebih Terang */
-    .api-card a:hover {
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.4); /* Glow lebih terang */
-        transform: scale(1.1);
-    }
-
-    /* State aktif: Warna tetap biru pada teks */
-    .api-card a:active {
-        color: #1E90FF; /* Warna biru saat klik */
-    }
-
-    /* Custom Buttons (GitHub, Telegram, REST API) */
     .custom-btn {
-        display: inline-block;
-        margin: 10px;
-        padding: 10px 15px;
-        border-radius: 5px;
-        background: transparent; /* Hilangkan background */
-        color: #d3d3d3;
-        font-size: 14px;
-        font-weight: bold;
-        text-decoration: none;
-        border: 2px solid transparent; /* Border transparan untuk efek glow */
-        position: relative;
-        overflow: hidden;
-        animation: fadeIn 1s ease-in-out; /* Animation added */
+        padding: 8px 12px;
+        font-size: 12px;
     }
-
-    /* Glow Pelangi hanya di pinggiran button */
-    .custom-btn::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: linear-gradient(white, white), radial-gradient(circle, #ff0054, #ff7b00, #ffcc00, #fffc00, #80ff00, #00ffee, #002bff, #aa00ff, #ff00aa); /* Pelangi di pinggir */
-        background-origin: border-box;
-        background-clip: content-box, border-box; /* Efek glow di pinggir */
-        z-index: -1; /* Pastikan berada di belakang teks */
-        border-radius: 5px;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-    }
-
-    /* Hover: Glow Pelangi hanya di pinggiran */
-    .custom-btn:hover::before {
-        opacity: 1;
-    }
-
-    /* Hover: Glow Lebih Terang */
-    .custom-btn:hover {
-        text-shadow: 10px; /* Hilangkan glow pada teks */
-        transform: scale(1.1);
-    }
-
-    /* State aktif: Warna tetap biru pada teks */
-    .custom-btn:active {
-        color: #1E90FF; /* Warna biru saat klik */
-    }
-
-    /* Flexbox untuk Align Tombol */
-    .btn-container {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 20px;
-    }
-
-    /* Efek Glow di Gambar */
-    .main img {
-        width: 100%;
-        height: auto;
-        border-radius: 10px;
-        box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
-    }
-
-    /* Header & Navbar */
-    nav {
-        background: none; /* Hilangkan background */
-        padding: 15px;
-        text-align: center;
-    }
-
-    .nav_links a {
-        color: white;
-        font-size: 16px;
-        text-decoration: none;
-        transition: 0.3s;
-    }
-
-    .nav_links a:hover {
-        text-shadow: 0 0 10px white;
-    }
-
-    /* Social Media Icons */
-    .main2 ul {
-        display: flex;
-        justify-content: center;
-        list-style: none;
-        padding: 0;
-    }
-
-    .main2 ul li {
-        margin: 0 10px;
-    }
-
-    .main2 ul li a {
-        color: white;
-        font-size: 20px;
-        transition: 0.3s;
-    }
-
-    .main2 ul li a:hover {
-        text-shadow: 0 0 15px white;
-        transform: scale(1.2);
-    }
+}
