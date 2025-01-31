@@ -1,9 +1,3 @@
-/* CSS Reset - Menghilangkan margin, padding default */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 
 /* Background untuk halaman utama 
 body {
@@ -208,4 +202,13 @@ body {
         padding: 8px 12px;
         font-size: 12px;
     }
+}
+
+@media(max-width: 800px){
+  body{
+    grid-template-columns:1fr;
+  }
+  main{
+    padding: 2em 1em 60px 1em;
+  }
 }
