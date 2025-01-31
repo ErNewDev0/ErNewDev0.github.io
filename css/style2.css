@@ -5,20 +5,20 @@
     padding: 0;
 }
 
-/* Background untuk halaman utama */
+/* Background untuk halaman utama 
 body {
     background-color: #111;
     color: #fff;
     font-family: Arial, sans-serif;
-    height: 100svh; /* Menghindari bug di mobile (Safari) */
+    height: 100vh
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    -webkit-font-smoothing: antialiased; /* Konsistensi font */
+    -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
+}*/
 
 /* Tombol React */
 .react-container {
