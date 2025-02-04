@@ -1,117 +1,356 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: #121212;
-            color: #fff;
-            font-family: monospace;
-            text-align: center;
-            overflow: hidden;
-        }
+    <title>My Profile</title><link rel="icon" href="https://t101.pixhost.to/thumbs/504/554431201_photo_2025-01-12_00-48-03_7458824443150729324.jpg">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/pixel-operator">
 
-        /* Loading Bar */
-        .loading-bar {
-            position: absolute;
-            top: 0;
-            width: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #ff00ff, #00ffff, #ff0000);
-            animation: loading 5s linear forwards;
-        }
+<style>
+    /* Efek fade saat load */
+    body {
+        background: linear-gradient(135deg, #122341, #152a4e);
+        color: white;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+    body.loaded {
+        opacity: 1;
+    }
 
-        @keyframes loading {
-            0% { width: 0; }
-            100% { width: 100%; }
-        }
+    /* Container styling */
+    .container {
+        text-align: center;
+        margin-top: 80px;
+        padding: 0 15px;
+    }
 
-        /* Animasi Blok */
-        .blocks {
-            display: flex;
-            gap: 10px; /* Lebih renggang */
-            margin-top: 20px;
-        }
+    /* Efek hujan */
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
 
-        .block {
-            width: 25px;
-            height: 25px;
-            background: #00ffff;
-            border-radius: 5px; /* Agar lebih halus */
-            animation: bounce 1s ease-in-out infinite alternate;
-        }
+    /* Tanggal & Weton */
+    .date-container {
+        font-family: Sans-Serif, Arial;
+        display: inline-block;
+        background: rgba(255,255,255,0);
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
 
-        .block:nth-child(2) { animation-delay: 0.2s; }
-        .block:nth-child(3) { animation-delay: 0.4s; }
+    .date-container.flipping {
+        transform: rotateY(180deg);
+    }
 
-        @keyframes bounce {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-15px); } /* Lebih tinggi tapi smooth */
-            100% { transform: translateY(0); }
-        }
+    /* Jam Digital */
+    #clock-container {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: -1; /* Menempatkan di belakang elemen lain */
+    }
 
-        /* Teks Loading */
-        .loading-text {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            animation: colorChange 2s infinite;
-        }
+    #clock {
+        width: 100px;
+        height: 100px;
+        opacity: 0.8; /* Agar tidak terlalu mencolok */
+    }
 
-        @keyframes colorChange {
-            0% { color: #ff0000; }
-            33% { color: #00ff00; }
-            66% { color: #0000ff; }
-            100% { color: #ffffff; }
+    @media (max-width: 576px) {
+        #clock {
+            width: 100px;
+            height: 100px;
         }
-    </style>
+    }
+
+    /* Tombol Sosial Media */
+    .btn {
+        margin: 8px;
+    }
+   .text-muted {
+
+ /* Warna background */
+        color: white; /* Warna teks */
+        
+        border-radius: 5px; /* Membuat sudut melengkung */
+    }
+    .lightning-flash {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: white;
+        opacity: 0;
+        z-index: 9999;
+        transition: opacity 0.2s;
+    }
+</style>
+
 </head>
 <body>
+    <canvas id="rainCanvas"></canvas><div class="container">
+    <img src="https://t101.pixhost.to/thumbs/504/554431201_photo_2025-01-12_00-48-03_7458824443150729324.jpg" class="rounded-circle" width="150" alt="Profile Picture">
+    <h1 class="mt-3">ErNewDev0</h1>
+    <p class="text-muted">print("Follow Me☺️☺️")</p>
 
-    <div class="loading-bar"></div>
-
-    <div class="blocks">
-        <div class="block"></div>
-        <div class="block"></div>
-        <div class="block"></div>
+    <!-- Tanggal & Weton -->
+    <div class="date-container mt-3" onclick="flipDate()">
+        <h4 id="flip-date">01 Januari 2025</h4>
+        <h5 id="weton">Wage Pon</h5>
     </div>
 
-    <div class="loading-text" id="loadingText">Memuat...</div>
+    <!-- Jam Digital -->
+    <div id="clock-container">
+        <canvas id="clock" width="100" height="100"></canvas>
+    </div>
 
-    <script>
-        const texts = [
-            "Load Resource...",
-            "Redirected...",
-            "Mencari WiFi gratis...",
-            "Ngopi dulu bentar...",
-            "Lagi ngobrol sama server...",
-            "Memuat... sumpah gak bohong!"
-        ];
+    <!-- Social Media Links -->
+    <div class="mt-4">
+        <a href="https://github.com/erbots" class="btn btn-dark"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://t.me/chakszzz" class="btn btn-primary"><i class="fab fa-telegram"> Telegram</i></a>
+        <a href="https://instagram.com/rikoyuan_" class="btn btn-info"><i class="fab fa-instagram"></i> My IG</a>
+        <a href="https://rest-er-api.vercel.app" class="btn btn-warning"><i class="fab fa-angellist"></i>REST API</a>
+    </div>
+</div>
 
-        let index = 0;
-        function changeText() {
-            document.getElementById("loadingText").textContent = texts[index];
-            index = (index + 1) % texts.length;
+<script>
+    // Efek fade-in saat halaman load
+    document.addEventListener("DOMContentLoaded", function () {
+        document.body.classList.add("loaded");
+    });
+
+    // Update tanggal dan weton
+    const dateElement = document.getElementById("flip-date");
+    const wetonElement = document.getElementById("weton");
+
+    function updateDate() {
+        const date = new Date();
+        const day = date.getDate();
+        const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                            "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        const month = monthNames[date.getMonth()];
+        const year = date.getFullYear();
+
+        dateElement.innerText = `${day} ${month} ${year}`;
+
+        // Hitung weton
+        const pasaran = ["Legi", "Pahing", "Pon", "Wage", "Kliwon"];
+        const hariJawa = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+        const wetonIndex = (date.getDay() + day) % 5;
+        wetonElement.innerText = `${hariJawa[date.getDay()]} ${pasaran[wetonIndex]}`;
+    }
+
+    function flipDate() {
+        const dateBox = document.querySelector('.date-container');
+        dateBox.classList.add('flipping');
+        setTimeout(() => {
+            dateBox.classList.remove('flipping');
+        }, 400);
+    }
+
+    updateDate();
+
+    // Update jam setiap detik
+        function drawClock() {
+            const canvas = document.getElementById("clock");
+            const ctx = canvas.getContext("2d");
+            const now = new Date();
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 40;
+
+            // 🎯 Gambar Lingkaran Jam
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = "#000";
+            ctx.fill();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = "#00FFFF";
+            ctx.stroke();
+            
+            // 🎯 Gambar Titik Tengah
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 3, 0, 2 * Math.PI);
+            ctx.fillStyle = "#00FFFF";
+            ctx.fill();
+
+            // 🎯 Ganti angka dengan teks "er new dev 0"
+            ctx.fillStyle = "#00FFFF";
+            ctx.font = "9px 'Press Start 2P'";
+            ctx.textAlign = "center";
+            ctx.fillText("Er", centerX, centerY - 25);
+            ctx.fillText("New", centerX + 30, centerY + 5);
+            ctx.fillText("Dev", centerX, centerY + 35);
+            ctx.fillText("0", centerX - 30, centerY + 5);
+
+            // 🎯 Gambar Jarum Jam
+            function drawHand(angle, length, color, lineWidth) {
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(centerX + length * Math.cos(angle), centerY + length * Math.sin(angle));
+                ctx.strokeStyle = color;
+                ctx.lineWidth = lineWidth;
+                ctx.lineCap = "round";
+                ctx.stroke();
+            }
+
+            // 🎯 Konversi Waktu ke Sudut
+            const hours = now.getHours() % 12;
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            const hourAngle = ((hours + minutes / 60) * 30 - 90) * Math.PI / 180;
+            const minuteAngle = ((minutes + seconds / 60) * 6 - 90) * Math.PI / 180;
+            const secondAngle = (seconds * 6 - 90) * Math.PI / 180;
+
+            drawHand(hourAngle, 20, "#00FFFF", 4);
+            drawHand(minuteAngle, 30, "#FFFFFF", 3);
+            drawHand(secondAngle, 35, "#FF0000", 2);
+
+            requestAnimationFrame(drawClock);
         }
 
-        // Ubah teks loading setiap 2 detik, tapi berhenti 1 detik sebelum redirect
-        let interval = setInterval(changeText, 2000);
-        
-        // Redirect setelah 5 detik
+        drawClock(); 
+
+    // Efek hujan dengan Canvas
+    const canvas = document.getElementById("rainCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let drops = [];
+
+    class Drop {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.length = Math.random() * 15 + 5;
+            this.speed = Math.random() * 4 + 2;
+        }
+
+        fall() {
+            this.y += this.speed;
+            if (this.y > canvas.height) {
+                this.y = -this.length;
+                this.x = Math.random() * canvas.width;
+            }
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(this.x, this.y + this.length);
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+    }
+
+    function createRain() {
+        for (let i = 0; i < 100; i++) {
+            drops.push(new Drop());
+        }
+    }
+
+    function animateRain() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let drop of drops) {
+            drop.fall();
+            drop.draw();
+        }
+        requestAnimationFrame(animateRain);
+    }
+
+    createRain();
+    animateRain();
+
+    window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        drops = [];
+        createRain();
+    });
+    const textElement = document.querySelector(".text-muted");
+    const text = 'print("Follow Me☺️☺️")';
+    let index = 0;
+    let cursorVisible = true;
+    
+    function typeText() {
+        if (index < text.length) {
+            textElement.innerHTML = text.slice(0, index) + '<span class="cursor">|</span>';
+            index++;
+            setTimeout(typeText, 50); // Kecepatan mengetik
+        } else {
+            blinkCursor(); // Memulai efek berkedip setelah selesai mengetik
+        }
+    }
+    
+    function blinkCursor() {
+        setInterval(() => {
+            cursorVisible = !cursorVisible;
+            textElement.innerHTML = text + (cursorVisible ? '<span class="cursor">|</span>' : '');
+        }, 500); // Efek berkedip tiap 500ms
+    }
+    
+    typeText();
+    
+    function lightningEffect() {
+        let flash = document.createElement("div");
+        flash.classList.add("lightning-flash");
+        document.body.appendChild(flash);
+    
+        // Flash pertama (kilatan cepat)
         setTimeout(() => {
-            clearInterval(interval); // Hentikan perubahan teks sebelum redirect
-            window.location.href = "index2.html";
-        }, 5000);
-    </script>
+            flash.style.opacity = 1;
+        }, Math.random() * 500); // Petir muncul secara acak
+    
+        setTimeout(() => {
+            flash.style.opacity = 0;
+        }, 100 + Math.random() * 200); // Kilatan cepat menghilang
+    
+        // Flash kedua (lebih redup)
+        setTimeout(() => {
+            flash.style.opacity = 0.7;
+        }, 300 + Math.random() * 500);
+    
+        setTimeout(() => {
+            flash.style.opacity = 0;
+            document.body.removeChild(flash); // Hapus elemen setelah efek selesai
+        }, 600 + Math.random() * 500);
+    }
+    
+    // Jalankan efek petir setiap 5-15 detik, dan kadang-kadang 2 kali cepat
+    setInterval(() => {
+        lightningEffect();
+        playThunderSound();
+    
+        // Tambahkan efek kedua dengan waktu acak yang cepat
+        if (Math.random() < 0.3) { // 30% kemungkinan untuk flash kedua yang cepat
+            setTimeout(() => {
+                lightningEffect();
+                playThunderSound();
+            }, Math.random() * 500); // Menambahkan delay cepat
+        }
+    
+    }, Math.random() * 10000 + 5000);
+    
+</script>
 
 </body>
-</html>
+</html> 
