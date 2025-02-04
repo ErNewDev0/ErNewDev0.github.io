@@ -43,6 +43,7 @@
     <div id="status" class="stat loading">Loading server status...</div>
     <div id="connected-users" class="stat loading">Fetching connected users...</div>
     <div id="uptime" class="stat loading">Fetching server uptime...</div>
+    <div id="total-requests" class="stat loading">Fetching total requests...</div>
     <div id="time" class="stat loading">Loading current time...</div>
   </div>
 
@@ -52,7 +53,8 @@
     eventSource.onmessage = function(event) {
       const data = JSON.parse(event.data);
       document.getElementById('status').textContent = `Status: ${data.message}`;
-      // Handle additional data here
+      document.getElementById('total-requests').textContent = `Total Requests: ${data.totalRequests}`;
+      // Additional data can be handled here
     };
 
     eventSource.onerror = function(event) {
